@@ -2,6 +2,7 @@ package org.redin.seckill.dao;
 
 import org.apache.ibatis.annotations.*;
 import org.redin.seckill.po.Seckill;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * Author: Redinw
  * Description:
  */
-@Mapper
+@Component
 public interface SeckillMapper {
 
     /**
@@ -24,8 +25,7 @@ public interface SeckillMapper {
     @Update("UPDATE seckill SET number = number-1 " +
             "WHERE seckill_id=#{seckillId} " +
             "AND start_time <![CDATA[<=]]> = #{killTime} " +
-            "AND end_time >= #{killTime} " +
-            "AND number>0")
+            "AND end_time >= #{killTime} AND number>0")
     int reduceNumber(@Param("seckillId") long seckillId, @Param("killTime") Date killTime);
 
     /**
@@ -36,7 +36,7 @@ public interface SeckillMapper {
      */
 
     @Select("SELECT seckill_id,name,number,start_time,end_time,create_time " +
-            "FROM seckill" +
+            "FROM seckill " +
             "WHERE seckill_id=#{seckillId}")
     @ResultMap("org.redin.seckill.dao.SeckillMapper.SeckillMap")
     Seckill queryById(long seckillId);
@@ -48,10 +48,7 @@ public interface SeckillMapper {
      * @return
      */
 
-    @Select("SELECT seckill_id,name,number,start_time,end_time,create-time" +
-            "FROM seckill" +
-            "ORDER BY create_time DESC" +
-            "LIMIT #{offet},#{limit}")
+    @Select("SELECT seckill_id,name,number,start_time,end_time,create_time FROM seckill ORDER BY create_time DESC LIMIT #{offet},#{limit}")
     @ResultMap("org.redin.seckill.dao.SeckillMapper.SeckillMap")
     List<Seckill> queryAll(@Param("offet") int offet, @Param("limit") int limit);
 

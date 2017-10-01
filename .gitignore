@@ -10,13 +10,10 @@ target/
 .springBeans
 
 ### IntelliJ IDEA ###
-.idea
+
 *.iws
-*.iml
 *.ipr
-.mvn
-mvnw
-*.cmd
+*.iml
 
 
 ### NetBeans ###
@@ -26,3 +23,5 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+src/main/resources/static/
+src/main/resources/templates/

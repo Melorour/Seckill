@@ -2,12 +2,13 @@ package org.redin.seckill.dao;
 
 import org.apache.ibatis.annotations.*;
 import org.redin.seckill.po.SuccessKilled;
+import org.springframework.stereotype.Component;
 
 /**
  * Author: Redinw
  * Description:
  */
-@Mapper
+@Component
 public interface SuccessKilledMapper {
     /**
      * 插入购买明细，可过滤重复
@@ -17,7 +18,7 @@ public interface SuccessKilledMapper {
      * @param userPhone
      * @return
      */
-    @Insert("INSERT IGNORE INTO success_killed(seckill_id,user_phone)" +
+    @Insert("INSERT IGNORE INTO success_killed(seckill_id,user_phone) " +
             "VALUES (#{seckillId},#{userPhone})")
     int insertSuccessKilled(@Param("seckillId") long seckillId, @Param("userPhone") long userPhone);
 
@@ -27,8 +28,9 @@ public interface SuccessKilledMapper {
      * @param seckillId
      * @return
      */
-    @Select("SELECT sk.*,s.seckill_id as s_seckill_id,s.name,s.number,s.start_time,s.end_time,s.create_time as s_create_time" +
-            "FROM success_killed sk INNER JOIN seckill s ON s.seckill_id = sk.seckill_id WHERE sk.sseckill_id=#{seckillId}")
+    @Select("SELECT sk.*,s.seckill_id as s_seckill_id,s.name,s.number,s.start_time,s.end_time,s.create_time as s_create_time " +
+            "FROM success_killed sk INNER JOIN seckill s ON s.seckill_id = sk.seckill_id WHERE sk.seckill_id=#{seckillId}")
     @ResultMap("org.redin.seckill.dao.SuccessKilledMapper.SuccessKilledMap")
     SuccessKilled queryByIdWithSeckill(long seckillId);
+
 }
