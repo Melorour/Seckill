@@ -7,7 +7,7 @@ import org.redin.seckill.po.SuccessKilled;
  * Author: Redinw
  * Description:
  */
-
+@Mapper
 public interface SuccessKilledMapper {
     /**
      * 插入购买明细，可过滤重复

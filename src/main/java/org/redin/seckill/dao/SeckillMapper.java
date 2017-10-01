@@ -10,7 +10,7 @@ import java.util.List;
  * Author: Redinw
  * Description:
  */
-
+@Mapper
 public interface SeckillMapper {
 
     /**
