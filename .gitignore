@@ -10,11 +10,10 @@ target/
 .springBeans
 
 ### IntelliJ IDEA ###
-
+.idea
 *.iws
-*.ipr
 *.iml
-
+*.ipr
 
 ### NetBeans ###
 nbproject/private/
@@ -23,10 +22,3 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-src/main/resources/static/
-src/main/resources/templates/
-.idea/
-.mvn/
-Seckill.iml
-mvnw
-mvnw.cmd
