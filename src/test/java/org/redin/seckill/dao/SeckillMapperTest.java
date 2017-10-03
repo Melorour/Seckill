@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 
@@ -26,7 +27,7 @@ public class SeckillMapperTest {
 
     @Test
     public void reduceNumber() throws Exception {
-
+        int rowindex = seckillMapper.reduceNumber(1000L,new Date());
     }
 
     @Test

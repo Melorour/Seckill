@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
  * Description:
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest()
+@SpringBootTest
 public class SuccessKilledMapperTest {
 
     @Resource

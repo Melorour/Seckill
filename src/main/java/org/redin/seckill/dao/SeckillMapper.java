@@ -3,6 +3,7 @@ package org.redin.seckill.dao;
 import org.apache.ibatis.annotations.*;
 import org.redin.seckill.po.Seckill;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  * Author: Redinw
  * Description:
  */
-@Component
+@Repository
 public interface SeckillMapper {
 
     /**
@@ -24,7 +25,7 @@ public interface SeckillMapper {
      */
     @Update("UPDATE seckill SET number = number-1 " +
             "WHERE seckill_id=#{seckillId} " +
-            "AND start_time <![CDATA[<=]]> = #{killTime} " +
+            "AND start_time <= #{killTime} " +
             "AND end_time >= #{killTime} AND number>0")
     int reduceNumber(@Param("seckillId") long seckillId, @Param("killTime") Date killTime);
 

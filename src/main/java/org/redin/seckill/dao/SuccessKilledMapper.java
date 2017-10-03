@@ -3,12 +3,13 @@ package org.redin.seckill.dao;
 import org.apache.ibatis.annotations.*;
 import org.redin.seckill.po.SuccessKilled;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * Author: Redinw
  * Description:
  */
-@Component
+@Repository
 public interface SuccessKilledMapper {
     /**
      * 插入购买明细，可过滤重复
