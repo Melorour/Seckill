@@ -29,13 +29,13 @@ public class ISeckillServiceTest {
 
     @Test
     public void queryAll() throws Exception {
-        List<Seckill> list = seckillService.queryAll();
+        List<Seckill> list = seckillService.getAll();
         logger.info("list={}", list);
     }
 
     @Test
     public void queryById() throws Exception {
-        Seckill seckill = seckillService.queryById(1000L);
+        Seckill seckill = seckillService.getById(1000L);
         logger.info("seckill={}", seckill);
     }
 

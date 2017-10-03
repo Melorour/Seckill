@@ -13,9 +13,9 @@ import java.util.List;
 
 public interface ISeckillService {
 
-    List<Seckill> queryAll();
+    List<Seckill> getAll();
 
-    Seckill queryById(long seckillId);
+    Seckill getById(long seckillId);
 
     Exposer exoportSeckillUrl(long seckillId);
 

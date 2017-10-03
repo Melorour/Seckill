@@ -23,6 +23,12 @@ public class SeckillExecution {
     //秒杀对象
     private SuccessKilled successKilled;
 
+    /**
+     * 秒杀成功
+     * @param seckillId
+     * @param seckillStateEnum
+     * @param successKilled
+     */
     public SeckillExecution(long seckillId, SeckillStateEnum seckillStateEnum, SuccessKilled successKilled) {
         this.seckillId = seckillId;
         this.state = seckillStateEnum.getState();
@@ -30,6 +36,11 @@ public class SeckillExecution {
         this.successKilled = successKilled;
     }
 
+    /**
+     * 秒杀失败
+     * @param seckillId
+     * @param seckillStateEnum
+     */
     public SeckillExecution(long seckillId, SeckillStateEnum seckillStateEnum) {
         this.seckillId = seckillId;
         this.state = seckillStateEnum.getState();

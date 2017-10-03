@@ -26,19 +26,30 @@ public class SeckillController {
     @Resource
     private ISeckillService seckillService;
 
+    /**
+     * 秒杀列表
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
-        List<Seckill> list = seckillService.queryAll();
+        List<Seckill> list = seckillService.getAll();
         model.addAttribute("list", list);
         return "list";
     }
 
+    /**
+     * 秒杀详情
+     * @param seckillId
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/{seckillId}/detail", method = RequestMethod.GET)
     public String detial(@PathVariable("seckillId") Long seckillId, Model model) {
         if (seckillId == null) {
             return "redirect:/seckill/list";
         }
-        Seckill seckill = seckillService.queryById(seckillId);
+        Seckill seckill = seckillService.getById(seckillId);
         if (seckill == null) {
             return "forward:/seckill/list";
         }
@@ -46,6 +57,11 @@ public class SeckillController {
         return "detail";
     }
 
+    /**
+     * 秒杀地址暴露
+     * @param seckillId
+     * @return
+     */
     @RequestMapping(value = "/{seckillId}/exposer",
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
@@ -61,6 +77,13 @@ public class SeckillController {
         return result;
     }
 
+    /**
+     * 执行秒杀
+     * @param seckillId
+     * @param md5
+     * @param phone
+     * @return
+     */
     @RequestMapping(value = "/{seckillId}/{md5}/execution",
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})

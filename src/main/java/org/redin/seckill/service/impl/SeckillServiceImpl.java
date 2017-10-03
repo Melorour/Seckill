@@ -40,18 +40,18 @@ public class SeckillServiceImpl implements ISeckillService {
 
 
     @Override
-    public List<Seckill> queryAll() {
+    public List<Seckill> getAll() {
         return seckillMapper.queryAll(0, 4);
     }
 
     @Override
-    public Seckill queryById(long seckillId) {
+    public Seckill getById(long seckillId) {
         return seckillMapper.queryById(seckillId);
     }
 
     @Override
     public Exposer exoportSeckillUrl(long seckillId) {
-        Seckill seckill = queryById(seckillId);
+        Seckill seckill = getById(seckillId);
         if (seckill == null) {
             return new Exposer(false, seckillId);
         }
