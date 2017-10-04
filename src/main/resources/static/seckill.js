@@ -44,7 +44,7 @@ var seckill = {
                                 var state = killResult['state'];
                                 var stateInfo = killResult['stateInfo'];
                                 //显示秒杀结果
-                                node.html('<span class="label label-success">+stateInfo+</span>');
+                                node.html('<span class="label label-success">'+stateInfo+'</span>');
                             }
                         });
                     });
@@ -70,7 +70,6 @@ var seckill = {
             seckillBox.html('秒杀结束');
         } else if (nowTime < startTime) {
             //秒杀未开始
-            alert("秒杀未开始");
             var killTime = new Date(startTime + 1000);
             seckillBox.countdown(killTime, function (event) {
                 //控制时间格式
