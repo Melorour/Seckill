@@ -22,23 +22,22 @@ var seckill = {
         }
     },
     handleSeckillkill: function (seckillId, node) {
-        alert("进入秒杀逻辑");
         node.hide().html('<button class="btn btn-primary btn-lg" id="killBtn">开始秒杀</button>');//按钮
         $.post(seckill.URL.exposer(seckillId), {}, function (result) {
             //在回调函数中，执行交互流程
             if (result && result['success']) {
                 var exposer = result['data'];
+                //如果exposed为true，就显示开始秒杀按钮，并绑定点击事件
                 if (exposer['exposed']) {
-                    //开始秒杀
-                    //获取秒杀地址
+                    //获取秒杀MD5
                     var md5 = exposer['md5'];
+                    //组装秒杀地址
                     var killUrl = seckill.URL.killUrl(seckillId, md5);
-                    alert('killUrl:' + killUrl);
                     console.log('killUrl:' + killUrl);
-                    //绑定一次点击事件
+                    //绑定一次点击事件，回调函数内容为执行秒杀
                     $('#killBtn').one('click', function () {
-                        //执行秒杀请求
                         $(this).addClass('disable');
+                        //执行秒杀请求
                         $.post(killUrl, {}, function (result) {
                             if (result && result['success']) {
                                 var killResult = result['data'];
@@ -83,8 +82,6 @@ var seckill = {
                 seckill.handleSeckillkill(seckillId, seckillBox);
             });
         } else {
-            //秒杀开始
-            alert('秒杀开始');
             seckill.handleSeckillkill(seckillId, seckillBox);
         }
 

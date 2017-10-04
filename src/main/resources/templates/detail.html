@@ -5,13 +5,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- 引入 Bootstrap -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/static/bootstrap.min.css" th:href="@{/bootstrap.min.css}" rel="stylesheet"/>
 
     <!-- HTML5 Shim 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
     <!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <script src="/static/html5shiv.js" th:src="@{/html5shiv.js}"></script>
+    <script src="/static/respond.min.js" th:src="@{/respond.min.js}"</script>
     <![endif]-->
 </head>
 <body>
@@ -63,17 +63,16 @@
 
 
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="/static/jquery.min.js" th:src="@{/jquery.min.js}"></script>
 
-<script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="/static/jquery.cookie.min.js" th:src="@{/jquery.cookie.min.js}"></script>
 
-<script src="https://cdn.bootcss.com/jquery.countdown/2.2.0/jquery.countdown.js"></script>
+<script src="/static/jquery.countdown.js" th:src="@{/jquery.countdown.js}"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/static/bootstrap.min.js" th:src="@{/bootstrap.min.js}"></script>
 
 <!--springboot自动寻找该js-->
 <script src="/static/seckill.js" th:src="@{/seckill.js}"></script>
-
 <script th:inline="javascript">
 
     $(function () {
