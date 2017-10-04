@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -66,7 +67,7 @@ public class SeckillController {
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public SeckillResult<Exposer> exposer(Long seckillId) {
+    public SeckillResult<Exposer> exposer(@PathVariable("seckillId") Long seckillId) {
         SeckillResult<Exposer> result;
         try {
             Exposer exposer = seckillService.exoportSeckillUrl(seckillId);
@@ -108,5 +109,12 @@ public class SeckillController {
             SeckillExecution execution = new SeckillExecution(seckillId,SeckillStateEnum.INNER_ERROR);
             return new SeckillResult<SeckillExecution>(false,execution);
         }
+    }
+
+    @RequestMapping(value = "/time/now",method = RequestMethod.GET)
+    @ResponseBody
+    public SeckillResult<Long> now(){
+        Date date = new Date();
+        return new SeckillResult<Long>(true,date.getTime());
     }
 }
