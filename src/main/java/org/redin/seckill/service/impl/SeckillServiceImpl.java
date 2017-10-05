@@ -89,7 +89,7 @@ public class SeckillServiceImpl implements ISeckillService {
                     //重复秒杀
                     throw new RepeatKillException("seckill repeated");
                 } else {
-                    SuccessKilled successKilled = successKilledMapper.queryByIdWithSeckill(seckllId);
+                    SuccessKilled successKilled = successKilledMapper.queryByIdWithSeckill(seckllId,userPhone);
                     return new SeckillExecution(seckllId, SeckillStateEnum.SUCCESS, successKilled);
                 }
             }
