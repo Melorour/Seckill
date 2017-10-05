@@ -1,4 +1,4 @@
-package org.redin.seckill.vo;
+package org.redin.seckill.dto;
 
 import lombok.Data;
 

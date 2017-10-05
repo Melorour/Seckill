@@ -1,8 +1,8 @@
 package org.redin.seckill.service;
 
 import org.redin.seckill.po.Seckill;
-import org.redin.seckill.vo.Exposer;
-import org.redin.seckill.vo.SeckillExecution;
+import org.redin.seckill.dto.Exposer;
+import org.redin.seckill.dto.SeckillExecution;
 
 import java.util.List;
 
