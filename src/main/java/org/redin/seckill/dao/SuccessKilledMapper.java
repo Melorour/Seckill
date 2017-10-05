@@ -32,6 +32,6 @@ public interface SuccessKilledMapper {
     @Select("SELECT sk.*,s.seckill_id as s_seckill_id,s.name,s.number,s.start_time,s.end_time,s.create_time as s_create_time " +
             "FROM success_killed sk INNER JOIN seckill s ON s.seckill_id = sk.seckill_id WHERE sk.seckill_id=#{seckillId}")
     @ResultMap("org.redin.seckill.dao.SuccessKilledMapper.SuccessKilledMap")
-    SuccessKilled queryByIdWithSeckill(long seckillId);
+    SuccessKilled queryByIdWithSeckill(@Param("seckillId") long seckillId,@Param("userPhone") long userPhone);
 
 }
