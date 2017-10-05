@@ -78,17 +78,17 @@ public class SeckillServiceImpl implements ISeckillService {
         Date nowTime = new Date();
         //执行秒杀逻辑=减库存+记录购买行为
         try {
-            int updateCount = seckillMapper.reduceNumber(seckllId, nowTime);
-            if (updateCount <= 0) {
-                //没有更新到记录
-                throw new SeckillClosedException("seckill is closed");
-            } else {
                 //记录购买行为
                 int insertCount = successKilledMapper.insertSuccessKilled(seckllId, userPhone);
                 if (insertCount <= 0) {
                     //重复秒杀
                     throw new RepeatKillException("seckill repeated");
                 } else {
+                    int updateCount = seckillMapper.reduceNumber(seckllId, nowTime);
+                    if (updateCount <= 0) {
+                        //没有更新到记录
+                        throw new SeckillClosedException("seckill is closed");
+                    } else {
                     SuccessKilled successKilled = successKilledMapper.queryByIdWithSeckill(seckllId,userPhone);
                     return new SeckillExecution(seckllId, SeckillStateEnum.SUCCESS, successKilled);
                 }
