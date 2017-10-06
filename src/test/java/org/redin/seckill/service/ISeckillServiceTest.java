@@ -67,8 +67,8 @@ public class ISeckillServiceTest {
 
     @Test
     public void executeSeckillProcedure(){
-        long seckillId = 1001L;
-        long phone = 1368011101;
+        long seckillId = 1000L;
+        long phone = 13680111011L;
         Exposer exposer = seckillService.exoportSeckillUrl(seckillId);
         if(exposer.isExposed()){
             String md5 = exposer.getMd5();
