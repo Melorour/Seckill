@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * Description:
  */
 @Configuration
-public class RedisConfig {
+public class Beans {
 
     @Bean
     public RedisDao redisDao(@Value("${spring.redis.host}") String ip, @Value("${spring.redis.port}") Integer port){
