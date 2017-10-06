@@ -2,6 +2,7 @@ package org.redin.seckill.service.impl;
 
 import org.redin.seckill.dao.SeckillMapper;
 import org.redin.seckill.dao.SuccessKilledMapper;
+import org.redin.seckill.dao.cache.RedisDao;
 import org.redin.seckill.enums.SeckillStateEnum;
 import org.redin.seckill.exception.RepeatKillException;
 import org.redin.seckill.exception.SeckillClosedException;
@@ -38,6 +39,8 @@ public class SeckillServiceImpl implements ISeckillService {
     @Resource
     private SuccessKilledMapper successKilledMapper;
 
+    @Resource
+    private RedisDao redisDao;
 
     @Override
     public List<Seckill> getAll() {
@@ -51,11 +54,15 @@ public class SeckillServiceImpl implements ISeckillService {
 
     @Override
     public Exposer exoportSeckillUrl(long seckillId) {
-        Seckill seckill = getById(seckillId);
-        if (seckill == null) {
-            return new Exposer(false, seckillId);
+        Seckill seckill = redisDao.getSeckill(seckillId);
+        if(seckill==null){
+            seckill=seckillMapper.queryById(seckillId);
+            if(seckill==null){
+                return new Exposer(false,seckillId);
+            }else{
+                redisDao.putSeckill(seckill);
+            }
         }
-
         Date startTime = seckill.getStartTime();
         Date endTime = seckill.getEndTime();
 

@@ -29,7 +29,7 @@ public class SuccessKilledMapperTest {
 
     @Test
     public void queryByIdWithSeckill() throws Exception {
-        SuccessKilled successKilled = successKilledMapper.queryByIdWithSeckill(1000L);
+        SuccessKilled successKilled = successKilledMapper.queryByIdWithSeckill(1000L,13671285902L);
         System.out.println(successKilled);
     }
 
