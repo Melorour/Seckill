@@ -1,12 +1,15 @@
 package org.redin.seckill.dao;
 
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.StatementType;
 import org.redin.seckill.po.Seckill;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Author: Redinw
@@ -53,4 +56,15 @@ public interface SeckillMapper {
     @ResultMap("org.redin.seckill.dao.SeckillMapper.SeckillMap")
     List<Seckill> queryAll(@Param("offet") int offet, @Param("limit") int limit);
 
+    /**
+     * 使用存储过程执行秒杀
+     * @param paramsMap
+     */
+
+    @Select("CALL execute_seckill(#{seckillId,jdbcType=BIGINT,mode=IN}," +
+            "#{phone,jdbcType=BIGINT,mode=IN}," +
+            "#{killTime,jdbcType=TIMESTAMP,mode=IN}," +
+            "#{result,jdbcType=INTEGER,mode=OUT})")
+    @Options(statementType = StatementType.CALLABLE)
+    void killByProcedure(Map<String,Object> paramsMap);
 }

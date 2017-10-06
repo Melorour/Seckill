@@ -1,5 +1,6 @@
 package org.redin.seckill.service.impl;
 
+import org.apache.commons.collections.MapUtils;
 import org.redin.seckill.dao.SeckillMapper;
 import org.redin.seckill.dao.SuccessKilledMapper;
 import org.redin.seckill.dao.cache.RedisDao;
@@ -20,7 +21,9 @@ import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Author: Redinw
@@ -116,5 +119,31 @@ public class SeckillServiceImpl implements ISeckillService {
         String base = seckillId + "/" + salt;
         String md5 = DigestUtils.md5DigestAsHex(base.getBytes());
         return seckillId + md5;
+    }
+
+    @Override
+    public SeckillExecution executeSeckillProcedure(long seckillid,long userPhone,String md5){
+        if(md5==null || !md5.equals(getMD5(seckillid))){
+            return new SeckillExecution(seckillid,SeckillStateEnum.DATA_REWRITE);
+        }
+        Date killTime = new Date();
+        Map<String,Object> map = new HashMap<>();
+        map.put("seckillId",seckillid);
+        map.put("phone",userPhone);
+        map.put("killTime",killTime);
+        map.put("result",null);
+        try{
+            seckillMapper.killByProcedure(map);
+            int result = MapUtils.getInteger(map,"result",-2);
+            if(result==1){
+                SuccessKilled successKilled = successKilledMapper.queryByIdWithSeckill(seckillid,userPhone);
+                return new SeckillExecution(seckillid,SeckillStateEnum.SUCCESS,successKilled);
+            }else{
+                return new SeckillExecution(seckillid,SeckillStateEnum.stateOf(result));
+            }
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            return new SeckillExecution(seckillid,SeckillStateEnum.INNER_ERROR);
+        }
     }
 }

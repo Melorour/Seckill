@@ -21,5 +21,6 @@ public interface ISeckillService {
 
     SeckillExecution executeSeckill(long seckllId, long userPhone, String md5);
 
+    SeckillExecution executeSeckillProcedure(long seckillid,long userPhone,String md5);
 
 }
