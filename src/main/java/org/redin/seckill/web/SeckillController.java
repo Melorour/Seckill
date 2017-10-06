@@ -29,6 +29,7 @@ public class SeckillController {
 
     /**
      * 秒杀列表
+     *
      * @param model
      * @return
      */
@@ -41,6 +42,7 @@ public class SeckillController {
 
     /**
      * 秒杀详情
+     *
      * @param seckillId
      * @param model
      * @return
@@ -60,6 +62,7 @@ public class SeckillController {
 
     /**
      * 秒杀地址暴露
+     *
      * @param seckillId
      * @return
      */
@@ -80,6 +83,7 @@ public class SeckillController {
 
     /**
      * 执行秒杀
+     *
      * @param seckillId
      * @param md5
      * @param phone
@@ -96,25 +100,14 @@ public class SeckillController {
             return new SeckillResult<SeckillExecution>(false, "未注册");
         }
         SeckillResult<SeckillExecution> result;
-        try {
-            SeckillExecution execution = seckillService.executeSeckill(seckillId, phone, md5);
-            return new SeckillResult<SeckillExecution>(true, execution);
-        } catch (RepeatKillException e) {
-            SeckillExecution execution = new SeckillExecution(seckillId, SeckillStateEnum.REPEAT_KILL);
-            return new SeckillResult<SeckillExecution>(true, execution);
-        } catch (SeckillClosedException e) {
-            SeckillExecution execution = new SeckillExecution(seckillId,SeckillStateEnum.END);
-            return new SeckillResult<SeckillExecution>(true,execution);
-        } catch (Exception e) {
-            SeckillExecution execution = new SeckillExecution(seckillId,SeckillStateEnum.INNER_ERROR);
-            return new SeckillResult<SeckillExecution>(true,execution);
-        }
+        SeckillExecution execution = seckillService.executeSeckillProcedure(seckillId, phone, md5);
+        return new SeckillResult<SeckillExecution>(true, execution);
     }
 
-    @RequestMapping(value = "/time/now",method = RequestMethod.GET)
+    @RequestMapping(value = "/time/now", method = RequestMethod.GET)
     @ResponseBody
-    public SeckillResult<Long> now(){
+    public SeckillResult<Long> now() {
         Date date = new Date();
-        return new SeckillResult<Long>(true,date.getTime());
+        return new SeckillResult<Long>(true, date.getTime());
     }
 }
