@@ -13,14 +13,14 @@ CREATE PROCEDURE `seckill`.`execute_seckill`
     VALUES (v_seckill_id, v_phone, v_kill_time);
     SELECT row_count()
     INTO insert_count;
-    IF (insert_count < 0)
+    IF (insert_count = 0)
     THEN
       ROLLBACK;
-      SET r_result = -1;
+      SET r_result = -1;-- 重复秒杀
     ELSEIF (insert_count < 0)
       THEN
         ROLLBACK;
-        SET r_result = -2;
+        SET r_result = -2;-- 系统错误
     ELSE
       UPDATE seckill
       SET number = number - 1
@@ -33,10 +33,13 @@ CREATE PROCEDURE `seckill`.`execute_seckill`
       IF (insert_count = 0)
       THEN
         ROLLBACK;
-        SET r_result = -2;
+        SET r_result = 0;-- 秒杀结束
+      ELSEIF(insert_count < 0) THEN
+        ROLLBACK;
+        set r_result=-2;-- 系统错误
       ELSE
         COMMIT;
-        SET r_result = -1;
+        SET r_result = 1;-- 秒杀成功
       END IF;
     END IF;
   END;
