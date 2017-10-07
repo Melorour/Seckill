@@ -17,7 +17,7 @@
 
 ## 项目资源
 - Source Code:[Seckill-master.zip](https://github.com/redinw/Seckill/archive/master.zip)
-- Export Package:[]
+- Export Package:[seckill-0.0.1-SNAPSHOT.jar](https://github.com/redinw/Seckill/releases/download/v0.0.1/seckill-0.0.1-SNAPSHOT.jar)
 	>- 打包好的jar，在JDK配置好前提下，下载后双击运行。
 	>- 浏览器地址栏输入：http://localhost:8080/seckill/list ,即可访问。
 
