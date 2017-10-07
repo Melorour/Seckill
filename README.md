@@ -1,4 +1,4 @@
-# Springboot秒杀Demo
+# 秒杀
 
 ## 开发环境
 - IntelliJ IDEA 2017 2.5
@@ -16,16 +16,16 @@
 - Jedis 2.9.0
 
 ## 项目资源
-- Source Code:[Seckill-master.zip](https://github.com/redinw/Seckill/archive/master.zip)
-- Export Package:[seckill-0.0.1-SNAPSHOT.jar](https://github.com/redinw/Seckill/releases/download/v0.0.1/seckill-0.0.1-SNAPSHOT.jar)
-	>- 打包好的jar，在JDK配置好前提下，下载后双击运行。
+- Source Code:  [Seckill-master.zip](https://github.com/redinw/Seckill/archive/master.zip)
+- Export Package:  [seckill-0.0.1-SNAPSHOT.jar](https://github.com/redinw/Seckill/releases/download/v0.0.1/seckill-0.0.1-SNAPSHOT.jar)
+	>- 打包好的jar，配置好JDK，下载后双击运行。
 	>- 浏览器地址栏输入：http://localhost:8080/seckill/list ,即可访问。
 
 ## 项目结构
 ```
 ├─java
 │  └─org.redin.seckill
-│     │  SeckillApplication.java
+│     │  SeckillApplication.java            //启动类，程序入口
 │     ├─config
 │     │      Beans.java
 │     ├─dao
@@ -37,11 +37,11 @@
 │     │      Exposer.java
 │     │      SeckillExecution.java
 │     ├─enums
-│     │      SeckillStateEnum.java 
+│     │      SeckillStateEnum.java
 │     ├─exception
-│     │      RepeatKillException.java
-│     │      SeckillClosedException.java
-│     │      SeckillException.java  
+│     │      RepeatKillException.java        //重复秒杀
+│     │      SeckillClosedException.java     //秒杀结束
+│     │      SeckillException.java           
 │     ├─po
 │     │      Seckill.java
 │     │      SuccessKilled.java
@@ -49,29 +49,33 @@
 │     │  │  ISeckillService.java
 │     │  │  
 │     │  └─impl
-│     │          SeckillServiceImpl.java   
+│     │          SeckillServiceImpl.java
 │     ├─vo
 │     │      SeckillResult.java
 │     └─web
 │            SeckillController.java
 └─resources
-    │  application.properties
-    │  log4j2.xml
+    │  application.properties                //SpringBoot配置文件
+    │  log4j2.xml                            //log4j2配置文件，放到该目录下，SpringBoot会自动扫描
     ├─mapper
     │      SeckillMapper.xml
     │      SuccessKilledMapper.xml
     ├─sql
-    │      procedure.sql
-    │      schema.sql
-    ├─static
+    │      procedure.sql                     //存储过程
+    │      schema.sql                        //建库建表
+    ├─static                                 //静态资源
     └─templates
-            detail.html
-            list.html
+            detail.html                      //秒杀详情页
+            list.html                        //秒杀列表
 ```
 ## 项目导入(IDEA)
 - Import Project，找到解压后的Source Code
 - Import project from external model -> Maven -> next...
 
-## 其他
+## 资料
 - [Spring-Boot干货系列](http://tengj.top/categories/springMVC%E5%B9%B2%E8%B4%A7%E7%B3%BB%E5%88%97/)
 - [Druid Spring Boot Starter](https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter)
+- [新一代Java模板引擎Thymeleaf](https://www.tianmaying.com/tutorial/using-thymeleaf)
+
+## 联系我
+- Email:  redinwer@gmail.com
